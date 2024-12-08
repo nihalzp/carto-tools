@@ -1,0 +1,55 @@
+#include "write/write_csv.h"
+#include "map/map.h"
+#include "region/region.h"
+#include <csv_parser/csv.hpp>
+#include <fstream>
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+
+std::vector<std::vector<std::string>> extract_csv_rows(const Map &map)
+{
+  std::vector<std::vector<std::string>> csv_rows;
+
+  const auto regions = map.get_regions();
+
+  std::vector<std::string> column_names;
+  for (const auto &[header, _] : regions[0].properties) {
+    column_names.push_back(header);
+  }
+
+  column_names.push_back("Cartogram Data (eg. Population)");
+
+  csv_rows.push_back(column_names);
+
+  for (const auto &region : regions) {
+    std::vector<std::string> row;
+    for (const auto &[_, value] : region.properties) {
+      row.push_back(value);
+    }
+    row.push_back("");
+    csv_rows.push_back(row);
+  }
+
+  return csv_rows;
+};
+
+void write_csv(const Map &map)
+{
+  std::string csv_file_name = map.get_map_name() + ".csv";
+
+  std::cout << "Writing CSV file: " << csv_file_name << "\n";
+
+  std::ofstream out_file_csv(csv_file_name);
+
+  auto csv_rows = extract_csv_rows(map);
+
+  auto writer = csv::make_csv_writer(out_file_csv);
+
+  for (const auto &row : csv_rows) {
+    writer << row;
+  }
+
+  out_file_csv.close();
+}
