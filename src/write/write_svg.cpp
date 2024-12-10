@@ -2,7 +2,15 @@
 #include "map/map.h"
 #include "region/region.h"
 #include "write/svg.h"
+#include <boost/geometry.hpp>
+#include <boost/geometry/algorithms.hpp>
+#include <boost/geometry/geometries/point_xy.hpp>
+#include <boost/geometry/geometries/polygon.hpp>
+#include <boost/geometry/geometries/segment.hpp>
+#include <string>
+#include <vector>
 
+typedef boost::geometry::model::d2::point_xy<double> Point;
 typedef boost::geometry::model::segment<Point> Segment;
 
 void plot(const Point &point, SVG &svg, const std::string &color)

@@ -1,7 +1,12 @@
+#include "parse/parse_geojson.h"
+#include "map/map.h"
+#include "polygon_with_holes/polygon_with_holes.h"
+#include "region/region.h"
 #include <fstream>
-#include <map/map.h>
-#include <parse/parse_geojson.h>
-#include <polygon_with_holes/polygon_with_holes.h>
+#include <nlohmann/json.hpp>
+#include <stdexcept>
+#include <string>
+#include <vector>
 
 nlohmann::json read_geojson(const std::string &geofile)
 {
@@ -9,8 +14,7 @@ nlohmann::json read_geojson(const std::string &geofile)
   std::ifstream file(geofile);
 
   if (!file.is_open()) {
-    std::cerr << "Error: Could not open file " << geofile << "\n";
-    exit(1);
+    throw std::runtime_error("Error: Could not open file " + geofile);
   }
 
   file >> geojson;

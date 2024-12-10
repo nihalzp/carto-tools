@@ -1,6 +1,7 @@
+#pragma once
+
 #include "map/map.h"
 #include "region/region.h"
-#include <boost/geometry/geometries/linestring.hpp>
 #include <functional>
 
 double combiner_addition(const double, const double);

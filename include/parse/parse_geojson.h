@@ -4,6 +4,7 @@
 #include "region/region.h"
 #include <nlohmann/json.hpp>
 #include <string>
+#include <vector>
 
 nlohmann::json read_geojson(const std::string &);
 std::vector<Region> extract_regions(nlohmann::json);

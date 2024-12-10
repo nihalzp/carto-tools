@@ -9,6 +9,7 @@
 #include "parse/parse_arguments.h"
 #include "write/write_csv.h"
 #include "write/write_svg.h"
+#include <argparse/argparse.hpp>
 #include <cmath>
 #include <iostream>
 #include <map>

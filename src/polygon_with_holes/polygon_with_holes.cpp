@@ -1,4 +1,16 @@
 #include "polygon_with_holes/polygon_with_holes.h"
+#include <boost/geometry.hpp>
+#include <boost/geometry/algorithms/area.hpp>
+#include <boost/geometry/algorithms/centroid.hpp>
+#include <boost/geometry/algorithms/envelope.hpp>
+#include <boost/geometry/geometries/box.hpp>
+#include <boost/geometry/geometries/point_xy.hpp>
+#include <boost/geometry/geometries/polygon.hpp>
+#include <boost/geometry/strategies/transform.hpp>
+#include <cmath>
+#include <utility>
+
+typedef boost::geometry::model::d2::point_xy<double> Point;
 
 Polygon_with_holes::Polygon_with_holes(
   const boost::geometry::model::polygon<Point> &polygon)

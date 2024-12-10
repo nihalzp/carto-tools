@@ -1,4 +1,5 @@
 #include "write/svg.h"
+#include <string>
 
 SVG::SVG(const std::string &filename, int w, int h) : width(w), height(h)
 {

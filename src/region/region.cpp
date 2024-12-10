@@ -1,5 +1,10 @@
-#include <parse/parse_geojson.h>
-#include <region/region.h>
+#include "region/region.h"
+#include "parse/parse_geojson.h"
+#include "polygon_with_holes/polygon_with_holes.h"
+#include <map>
+#include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 Region::Region(
   nlohmann::json feature,

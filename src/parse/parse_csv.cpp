@@ -1,6 +1,8 @@
 #include "parse/parse_csv.h"
 #include <csv_parser/csv.hpp>
 #include <map>
+#include <string>
+#include <vector>
 
 csv::CSVReader read_csv(const std::string &csv_file)
 {

@@ -2,6 +2,10 @@
 #include "map/map.h"
 #include "polygon_with_holes/polygon_with_holes.h"
 #include "region/region.h"
+#include <boost/geometry.hpp>
+#include <boost/geometry/algorithms/intersection.hpp>
+#include <boost/geometry/geometries/point_xy.hpp>
+#include <boost/geometry/geometries/segment.hpp>
 
 typedef boost::geometry::model::d2::point_xy<double> Point;
 typedef boost::geometry::model::segment<Point> Segment;

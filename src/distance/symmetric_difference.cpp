@@ -3,6 +3,7 @@
 #include "map/map.h"
 #include "polygon_with_holes/polygon_with_holes.h"
 #include "region/region.h"
+#include <boost/geometry.hpp>
 #include <boost/geometry/algorithms/area.hpp>
 #include <boost/geometry/algorithms/sym_difference.hpp>
 

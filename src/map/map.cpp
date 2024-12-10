@@ -2,9 +2,14 @@
 #include "parse/parse_csv.h"
 #include "parse/parse_geojson.h"
 #include "region/region.h"
-#include <fstream>
 #include <iostream>
+#include <map>
+#include <nlohmann/json.hpp>
+#include <set>
+#include <stdexcept>
 #include <string>
+#include <utility>
+#include <vector>
 
 Map::Map(std::string geofile)
 {

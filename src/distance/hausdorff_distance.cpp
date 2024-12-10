@@ -2,6 +2,7 @@
 #include "distance/distance.h"
 #include "map/map.h"
 #include "region/region.h"
+#include <boost/geometry.hpp>
 #include <boost/geometry/algorithms/discrete_hausdorff_distance.hpp>
 #include <boost/geometry/geometries/linestring.hpp>
 #include <boost/geometry/geometries/point_xy.hpp>
