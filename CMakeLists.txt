@@ -32,3 +32,5 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     /W4
   )
 endif()
+
+install(TARGETS carto DESTINATION /usr/local/bin)
