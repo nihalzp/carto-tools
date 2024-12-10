@@ -1,7 +1,7 @@
-#include "parse/parse_geojson.h"
-#include "map/map.h"
-#include "polygon_with_holes/polygon_with_holes.h"
-#include "region/region.h"
+#include "parse/parse_geojson.hpp"
+#include "map/map.hpp"
+#include "polygon_with_holes/polygon_with_holes.hpp"
+#include "region/region.hpp"
 #include <fstream>
 #include <nlohmann/json.hpp>
 #include <stdexcept>

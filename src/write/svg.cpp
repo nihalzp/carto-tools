@@ -1,4 +1,4 @@
-#include "write/svg.h"
+#include "write/svg.hpp"
 #include <string>
 
 SVG::SVG(const std::string &filename, unsigned int w, unsigned int h)

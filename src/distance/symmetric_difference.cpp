@@ -1,8 +1,8 @@
-#include "distance/symmetric_difference.h"
-#include "distance/distance.h"
-#include "map/map.h"
-#include "polygon_with_holes/polygon_with_holes.h"
-#include "region/region.h"
+#include "distance/symmetric_difference.hpp"
+#include "distance/distance.hpp"
+#include "map/map.hpp"
+#include "polygon_with_holes/polygon_with_holes.hpp"
+#include "region/region.hpp"
 #include <boost/geometry.hpp>
 #include <boost/geometry/algorithms/area.hpp>
 #include <boost/geometry/algorithms/sym_difference.hpp>

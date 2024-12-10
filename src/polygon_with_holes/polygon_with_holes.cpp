@@ -1,4 +1,4 @@
-#include "polygon_with_holes/polygon_with_holes.h"
+#include "polygon_with_holes/polygon_with_holes.hpp"
 #include <boost/geometry.hpp>
 #include <boost/geometry/algorithms/area.hpp>
 #include <boost/geometry/algorithms/centroid.hpp>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "polygon_with_holes/polygon_with_holes.h"
+#include "polygon_with_holes/polygon_with_holes.hpp"
 #include <map>
 #include <nlohmann/json.hpp>
 #include <string>

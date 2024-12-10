@@ -1,6 +1,6 @@
 #pragma once
 
-#include "map/map.h"
+#include "map/map.hpp"
 #include <boost/geometry.hpp>
 #include <boost/geometry/geometries/point_xy.hpp>
 #include <vector>

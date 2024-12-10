@@ -1,7 +1,7 @@
 #pragma once
 
-#include "map/map.h"
-#include "region/region.h"
+#include "map/map.hpp"
+#include "region/region.hpp"
 #include <functional>
 
 double combiner_addition(const double, const double);

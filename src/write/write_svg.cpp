@@ -1,7 +1,7 @@
-#include "write/write_svg.h"
-#include "map/map.h"
-#include "region/region.h"
-#include "write/svg.h"
+#include "write/write_svg.hpp"
+#include "map/map.hpp"
+#include "region/region.hpp"
+#include "write/svg.hpp"
 #include <boost/geometry.hpp>
 #include <boost/geometry/geometries/point_xy.hpp>
 #include <boost/geometry/geometries/polygon.hpp>

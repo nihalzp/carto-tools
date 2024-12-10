@@ -1,7 +1,7 @@
-#include "map/map.h"
-#include "parse/parse_csv.h"
-#include "parse/parse_geojson.h"
-#include "region/region.h"
+#include "map/map.hpp"
+#include "parse/parse_csv.hpp"
+#include "parse/parse_geojson.hpp"
+#include "region/region.hpp"
 #include <iostream>
 #include <map>
 #include <nlohmann/json.hpp>

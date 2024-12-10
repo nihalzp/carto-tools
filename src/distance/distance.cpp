@@ -1,6 +1,6 @@
-#include "distance/distance.h"
-#include "map/map.h"
-#include "region/region.h"
+#include "distance/distance.hpp"
+#include "map/map.hpp"
+#include "region/region.hpp"
 #include <functional>
 
 double combiner_addition(const double total, const double current)

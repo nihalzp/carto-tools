@@ -1,4 +1,4 @@
-#include "parse/parse_arguments.h"
+#include "parse/parse_arguments.hpp"
 #include <argparse/argparse.hpp>
 
 void add_arguments(argparse::ArgumentParser &arguments)

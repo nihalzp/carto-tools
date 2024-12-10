@@ -1,6 +1,6 @@
-#include "region/region.h"
-#include "parse/parse_geojson.h"
-#include "polygon_with_holes/polygon_with_holes.h"
+#include "region/region.hpp"
+#include "parse/parse_geojson.hpp"
+#include "polygon_with_holes/polygon_with_holes.hpp"
 #include <map>
 #include <nlohmann/json.hpp>
 #include <string>

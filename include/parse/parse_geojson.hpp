@@ -1,7 +1,7 @@
 #pragma once
 
-#include "polygon_with_holes/polygon_with_holes.h"
-#include "region/region.h"
+#include "polygon_with_holes/polygon_with_holes.hpp"
+#include "region/region.hpp"
 #include <nlohmann/json.hpp>
 #include <string>
 #include <vector>

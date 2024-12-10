@@ -1,6 +1,6 @@
-#include "error/area_weighted_mean_error.h"
-#include "map/map.h"
-#include "region/region.h"
+#include "error/area_weighted_mean_error.hpp"
+#include "map/map.hpp"
+#include "region/region.hpp"
 #include <iostream>
 
 double relative_error(const double actual_area, const double target_area)

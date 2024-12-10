@@ -1,7 +1,7 @@
-#include "intersection/self_intersection.h"
-#include "map/map.h"
-#include "polygon_with_holes/polygon_with_holes.h"
-#include "region/region.h"
+#include "intersection/self_intersection.hpp"
+#include "map/map.hpp"
+#include "polygon_with_holes/polygon_with_holes.hpp"
+#include "region/region.hpp"
 #include <boost/geometry.hpp>
 #include <boost/geometry/algorithms/intersection.hpp>
 #include <boost/geometry/geometries/point_xy.hpp>

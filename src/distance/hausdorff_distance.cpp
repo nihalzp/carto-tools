@@ -1,7 +1,7 @@
-#include "distance/hausdorff_distance.h"
-#include "distance/distance.h"
-#include "map/map.h"
-#include "region/region.h"
+#include "distance/hausdorff_distance.hpp"
+#include "distance/distance.hpp"
+#include "map/map.hpp"
+#include "region/region.hpp"
 #include <boost/geometry.hpp>
 #include <boost/geometry/algorithms/discrete_hausdorff_distance.hpp>
 #include <boost/geometry/geometries/linestring.hpp>
