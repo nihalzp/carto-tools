@@ -18,25 +18,6 @@ Map::Map(std::string geofile)
   map_name_ = geofile.substr(0, geofile.find_last_of("."));
 }
 
-double Map::compute_area()
-{
-  double total_area = 0.0;
-  for (const auto &region : regions_) {
-    total_area += region.compute_area();
-  }
-  return total_area;
-};
-
-Region Map::find_matching_region(const Region &other_region) const
-{
-  for (const auto &region : regions_) {
-    if (region == other_region) {
-      return region;
-    }
-  }
-  throw std::runtime_error("No matching region found.");
-}
-
 std::string Map::get_map_name() const
 {
   return map_name_;
@@ -47,7 +28,52 @@ const std::vector<Region> &Map::get_regions() const
   return regions_;
 }
 
-std::pair<bool, std::string> find_matching_property_header(
+double Map::compute_area()
+{
+  double total_area = 0.0;
+  for (const auto &region : regions_) {
+    total_area += region.compute_area();
+  }
+  return total_area;
+};
+
+double Map::compute_xmax() const
+{
+  double xmax = std::numeric_limits<double>::lowest();
+  for (const auto &region : regions_) {
+    xmax = std::max(xmax, region.compute_xmax());
+  }
+  return xmax;
+}
+
+double Map::compute_xmin() const
+{
+  double xmin = std::numeric_limits<double>::max();
+  for (const auto &region : regions_) {
+    xmin = std::min(xmin, region.compute_xmin());
+  }
+  return xmin;
+}
+
+double Map::compute_ymax() const
+{
+  double ymax = std::numeric_limits<double>::lowest();
+  for (const auto &region : regions_) {
+    ymax = std::max(ymax, region.compute_ymax());
+  }
+  return ymax;
+}
+
+double Map::compute_ymin() const
+{
+  double ymin = std::numeric_limits<double>::max();
+  for (const auto &region : regions_) {
+    ymin = std::min(ymin, region.compute_ymin());
+  }
+  return ymin;
+}
+
+static std::pair<bool, std::string> find_matching_property_header(
   const std::vector<Region> &regions,
   const std::vector<std::string> &properties)
 {
@@ -69,7 +95,7 @@ std::pair<bool, std::string> find_matching_property_header(
   return {false, ""};
 }
 
-std::map<std::string, double> combine_property_with_target_area(
+static std::map<std::string, double> combine_property_with_target_area(
   const std::vector<std::string> &target_areas,
   const std::vector<std::string> &properties)
 {
@@ -80,7 +106,7 @@ std::map<std::string, double> combine_property_with_target_area(
   return property_to_target_area;
 }
 
-std::pair<std::string, std::map<std::string, double>>
+static std::pair<std::string, std::map<std::string, double>>
 match_region_target_areas(
   const std::vector<Region> &regions,
   const std::map<std::string, std::vector<std::string>> csv_data)
@@ -103,45 +129,6 @@ match_region_target_areas(
   throw std::runtime_error("No matching property found.");
 }
 
-void Map::scale(const double factor)
-{
-  for (auto &region : regions_) {
-    region.scale(factor);
-  }
-}
-
-double Map::get_total_target_area() const
-{
-  double total_target_area = 0.0;
-  for (const auto &region : regions_) {
-    total_target_area += region.get_target_area();
-  }
-  return total_target_area;
-}
-
-void Map::make_total_target_area_one()
-{
-  const double total_target_area = get_total_target_area();
-  for (auto &region : regions_) {
-    const double cur_target_area = region.get_target_area();
-    region.update_target_area(cur_target_area / total_target_area);
-  }
-}
-
-void Map::translate(const double dx, const double dy)
-{
-  for (auto &region : regions_) {
-    region.translate(dx, dy);
-  }
-}
-
-void Map::standardize_each_pwh_independently()
-{
-  for (auto &region : regions_) {
-    region.standardize_each_pwh_independently();
-  }
-}
-
 void Map::store_target_areas(const std::string target_area_file)
 {
   const std::map<std::string, std::vector<std::string>> csv_data =
@@ -160,47 +147,50 @@ void Map::update_regions_target_areas(
   }
 }
 
+double Map::compute_total_target_area() const
+{
+  double total_target_area = 0.0;
+  for (const auto &region : regions_) {
+    total_target_area += region.get_target_area();
+  }
+  return total_target_area;
+}
+
+void Map::scale(const double factor)
+{
+  for (auto &region : regions_) {
+    region.scale(factor);
+  }
+}
+
+void Map::translate(const double dx, const double dy)
+{
+  for (auto &region : regions_) {
+    region.translate(dx, dy);
+  }
+}
+
+void Map::make_total_target_area_one()
+{
+  const double total_target_area = compute_total_target_area();
+  for (auto &region : regions_) {
+    const double cur_target_area = region.get_target_area();
+    region.update_target_area(cur_target_area / total_target_area);
+  }
+}
+
+void Map::standardize_each_pwh_independently()
+{
+  for (auto &region : regions_) {
+    region.standardize_each_pwh_independently();
+  }
+}
+
 void Map::make_total_area_one()
 {
   const double total_area = compute_area();
   const double scale_factor = 1.0 / std::sqrt(total_area);
   scale(scale_factor);
-}
-
-double Map::compute_xmin() const
-{
-  double xmin = std::numeric_limits<double>::max();
-  for (const auto &region : regions_) {
-    xmin = std::min(xmin, region.compute_xmin());
-  }
-  return xmin;
-}
-
-double Map::compute_xmax() const
-{
-  double xmax = std::numeric_limits<double>::lowest();
-  for (const auto &region : regions_) {
-    xmax = std::max(xmax, region.compute_xmax());
-  }
-  return xmax;
-}
-
-double Map::compute_ymin() const
-{
-  double ymin = std::numeric_limits<double>::max();
-  for (const auto &region : regions_) {
-    ymin = std::min(ymin, region.compute_ymin());
-  }
-  return ymin;
-}
-
-double Map::compute_ymax() const
-{
-  double ymax = std::numeric_limits<double>::lowest();
-  for (const auto &region : regions_) {
-    ymax = std::max(ymax, region.compute_ymax());
-  }
-  return ymax;
 }
 
 void Map::adjust_map_for_plotting()
@@ -245,4 +235,14 @@ void Map::adjust_map_for_plotting()
 
   // Translate back to the center
   translate(target_center_x, target_center_y);
+}
+
+Region Map::find_matching_region(const Region &other_region) const
+{
+  for (const auto &region : regions_) {
+    if (region == other_region) {
+      return region;
+    }
+  }
+  throw std::runtime_error("No matching region found.");
 }

@@ -11,15 +11,14 @@ class Polygon_with_holes : public boost::geometry::model::polygon<Point>
 public:
   Polygon_with_holes() = default;
   Polygon_with_holes(const boost::geometry::model::polygon<Point> &);
-
   double compute_area() const;
-  void scale(const double);
-  void translate(const double, const double);
-  void standardize();
-  double compute_xmin() const;
   double compute_xmax() const;
-  double compute_ymin() const;
+  double compute_xmin() const;
   double compute_ymax() const;
+  double compute_ymin() const;
+  void scale(const double);
+  void standardize();
+  void translate(const double, const double);
 };
 
 // Register the new class as a polygon in Boost.Geometry

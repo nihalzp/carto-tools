@@ -10,6 +10,16 @@ SVG::SVG(const std::string &filename, unsigned int w, unsigned int h)
             << "viewBox='0 0 " << width_ << " " << height_ << "'>\n";
 }
 
+void SVG::add_point(
+  double x,
+  double y,
+  const std::string &color,
+  double radius)
+{
+  svg_file_ << "<circle cx='" << x << "' cy='" << height_ - y << "' r='"
+            << radius << "' style='fill:" << color << "' />\n";
+}
+
 void SVG::add_segment(
   double x1,
   double y1,
@@ -21,16 +31,6 @@ void SVG::add_segment(
   svg_file_ << "<line x1='" << x1 << "' y1='" << height_ - y1 << "' x2='" << x2
             << "' y2='" << height_ - y2 << "' style='stroke:" << color
             << ";stroke-width:" << stroke_width << "' />\n";
-}
-
-void SVG::add_point(
-  double x,
-  double y,
-  const std::string &color,
-  double radius)
-{
-  svg_file_ << "<circle cx='" << x << "' cy='" << height_ - y << "' r='"
-            << radius << "' style='fill:" << color << "' />\n";
 }
 
 SVG::~SVG()

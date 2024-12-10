@@ -23,6 +23,34 @@ double Polygon_with_holes::compute_area() const
   return abs(boost::geometry::area(*this));
 }
 
+double Polygon_with_holes::compute_xmax() const
+{
+  boost::geometry::model::box<Point> bounding_box;
+  boost::geometry::envelope(*this, bounding_box);
+  return bounding_box.max_corner().get<0>();
+}
+
+double Polygon_with_holes::compute_xmin() const
+{
+  boost::geometry::model::box<Point> bounding_box;
+  boost::geometry::envelope(*this, bounding_box);
+  return bounding_box.min_corner().get<0>();
+}
+
+double Polygon_with_holes::compute_ymax() const
+{
+  boost::geometry::model::box<Point> bounding_box;
+  boost::geometry::envelope(*this, bounding_box);
+  return bounding_box.max_corner().get<1>();
+}
+
+double Polygon_with_holes::compute_ymin() const
+{
+  boost::geometry::model::box<Point> bounding_box;
+  boost::geometry::envelope(*this, bounding_box);
+  return bounding_box.min_corner().get<1>();
+}
+
 void Polygon_with_holes::scale(const double factor)
 {
   boost::geometry::strategy::transform::scale_transformer<double, 2, 2> scaler(
@@ -53,32 +81,4 @@ void Polygon_with_holes::standardize()
 
   const double area = compute_area();
   scale(1.0 / std::sqrt(std::abs(area)));
-}
-
-double Polygon_with_holes::compute_xmin() const
-{
-  boost::geometry::model::box<Point> bounding_box;
-  boost::geometry::envelope(*this, bounding_box);
-  return bounding_box.min_corner().get<0>();
-}
-
-double Polygon_with_holes::compute_xmax() const
-{
-  boost::geometry::model::box<Point> bounding_box;
-  boost::geometry::envelope(*this, bounding_box);
-  return bounding_box.max_corner().get<0>();
-}
-
-double Polygon_with_holes::compute_ymin() const
-{
-  boost::geometry::model::box<Point> bounding_box;
-  boost::geometry::envelope(*this, bounding_box);
-  return bounding_box.min_corner().get<1>();
-}
-
-double Polygon_with_holes::compute_ymax() const
-{
-  boost::geometry::model::box<Point> bounding_box;
-  boost::geometry::envelope(*this, bounding_box);
-  return bounding_box.max_corner().get<1>();
 }

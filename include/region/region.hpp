@@ -16,20 +16,20 @@ private:
 public:
   Region(const nlohmann::json, const std::vector<std::string>);
   double compute_area() const;
+  double compute_xmax() const;
+  double compute_xmin() const;
+  double compute_ymax() const;
+  double compute_ymin() const;
+  unsigned int get_num_pwhs() const;
+  const std::map<std::string, std::string> &get_properties() const;
+  const std::vector<Polygon_with_holes> &get_pwhs() const;
+  double get_target_area() const;
+  bool operator==(const Region &) const;
   void scale(const double);
-  void translate(const double, const double);
   void standardize_each_pwh_independently();
+  void translate(const double, const double);
+  void update_target_area(const double);
   void update_target_area(
     const std::string,
     const std::map<std::string, double>);
-  void update_target_area(const double);
-  double get_target_area() const;
-  unsigned int get_num_pwhs() const;
-  bool operator==(const Region &) const;
-  double compute_xmin() const;
-  double compute_xmax() const;
-  double compute_ymin() const;
-  double compute_ymax() const;
-  const std::map<std::string, std::string> &get_properties() const;
-  const std::vector<Polygon_with_holes> &get_pwhs() const;
 };
