@@ -24,8 +24,8 @@ double calculate_frechet_distance(const Region &region1, const Region &region2)
 {
   double total_distance = 0.0;
   for (int i = 0; i < region1.num_pwhs(); ++i) {
-    const auto &pwh1 = region1.pwhs[i];
-    const auto &pwh2 = region2.pwhs[i];
+    const auto &pwh1 = region1.get_pwhs()[i];
+    const auto &pwh2 = region2.get_pwhs()[i];
     double outer_distance =
       calculate_frechet_distance(pwh1.outer(), pwh2.outer());
     total_distance = combiner_addition(total_distance, outer_distance);

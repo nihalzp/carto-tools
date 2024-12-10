@@ -79,7 +79,7 @@ std::vector<Point> get_self_intersections(const Polygon_with_holes &pwh)
 std::vector<Point> get_self_intersections(const Region &region)
 {
   std::vector<Point> intersection_pts;
-  for (const auto &pwh : region.pwhs) {
+  for (const auto &pwh : region.get_pwhs()) {
     std::vector<Point> intersection_pts_pwh = get_self_intersections(pwh);
     intersection_pts.insert(
       intersection_pts.end(),

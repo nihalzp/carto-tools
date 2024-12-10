@@ -43,8 +43,8 @@ std::vector<Point> get_overlap_intersections(const Map &map)
 
   for (int i = 0; i < regions.size(); ++i) {
     for (int j = i + 1; j < regions.size(); ++j) {
-      const auto &region_i_pwhs = regions[i].pwhs;
-      const auto &region_j_pwhs = regions[j].pwhs;
+      const auto &region_i_pwhs = regions[i].get_pwhs();
+      const auto &region_j_pwhs = regions[j].get_pwhs();
 
       for (const auto &pwh1 : region_i_pwhs) {
         for (const auto &pwh2 : region_j_pwhs) {

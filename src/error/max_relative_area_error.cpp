@@ -17,7 +17,7 @@ double relative_area_error(const Region &region)
 
 void print_relative_area_error_region(const Region &region)
 {
-  for (auto [_, property] : region.properties) {
+  for (auto [_, property] : region.get_properties()) {
     std::cout << property << ", ";
   }
   std::cout << ": " << relative_area_error(region) << std::endl;

@@ -56,7 +56,7 @@ void plot(const Polygon_with_holes &pwh, SVG &svg, const std::string &color)
 
 void plot(const Region &region, SVG &svg, const std::string &color)
 {
-  for (const auto &pwh : region.pwhs) {
+  for (const auto &pwh : region.get_pwhs()) {
     plot(pwh, svg, color);
   }
 }

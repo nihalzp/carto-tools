@@ -8,11 +8,11 @@
 class Map
 {
 private:
-  std::string map_name;
+  std::string map_name_;
+  std::vector<Region> regions_;
 
 public:
   Map(std::string);
-  std::vector<Region> regions;
   double area();
   std::string get_map_name() const;
   void make_total_area_one();
@@ -23,7 +23,7 @@ public:
   void update_regions_target_areas(
     const std::string,
     const std::map<std::string, double>);
-  const std::vector<Region> get_regions() const;
+  const std::vector<Region> &get_regions() const;
   void make_total_target_area_one();
   double get_total_target_area() const;
   Region find_matching_region(const Region &) const;

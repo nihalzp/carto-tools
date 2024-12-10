@@ -8,11 +8,13 @@
 
 class Region
 {
+private:
+  std::map<std::string, std::string> properties_;
+  std::vector<Polygon_with_holes> pwhs_;
+  double target_area_;
+
 public:
   Region(const nlohmann::json, const std::vector<std::string>);
-  std::map<std::string, std::string> properties;
-  std::vector<Polygon_with_holes> pwhs;
-  double target_area_;
   double area() const;
   void scale(const double);
   void translate(const double, const double);
@@ -28,4 +30,6 @@ public:
   double get_xmax() const;
   double get_ymin() const;
   double get_ymax() const;
+  const std::map<std::string, std::string> &get_properties() const;
+  const std::vector<Polygon_with_holes> &get_pwhs() const;
 };

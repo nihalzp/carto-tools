@@ -14,14 +14,14 @@
 Map::Map(std::string geofile)
 {
   const nlohmann::json geojson = read_geojson(geofile);
-  regions = extract_regions(geojson);
-  map_name = geofile.substr(0, geofile.find_last_of("."));
+  regions_ = extract_regions(geojson);
+  map_name_ = geofile.substr(0, geofile.find_last_of("."));
 }
 
 double Map::area()
 {
   double total_area = 0.0;
-  for (const auto &region : regions) {
+  for (const auto &region : regions_) {
     total_area += region.area();
   }
   return total_area;
@@ -29,7 +29,7 @@ double Map::area()
 
 Region Map::find_matching_region(const Region &other_region) const
 {
-  for (const auto &region : regions) {
+  for (const auto &region : regions_) {
     if (region == other_region) {
       return region;
     }
@@ -39,12 +39,12 @@ Region Map::find_matching_region(const Region &other_region) const
 
 std::string Map::get_map_name() const
 {
-  return map_name;
+  return map_name_;
 }
 
-const std::vector<Region> Map::get_regions() const
+const std::vector<Region> &Map::get_regions() const
 {
-  return regions;
+  return regions_;
 }
 
 std::pair<bool, std::string> find_matching_property_header(
@@ -53,7 +53,7 @@ std::pair<bool, std::string> find_matching_property_header(
 {
   std::map<std::string, std::set<std::string>> matched_properties;
   for (const auto &region : regions) {
-    for (const auto &[header, region_property] : region.properties) {
+    for (const auto &[header, region_property] : region.get_properties()) {
       for (const auto &csv_property : properties) {
         if (region_property == csv_property) {
           matched_properties[header].insert(region_property);
@@ -105,7 +105,7 @@ match_region_target_areas(
 
 void Map::scale(const double factor)
 {
-  for (auto &region : regions) {
+  for (auto &region : regions_) {
     region.scale(factor);
   }
 }
@@ -113,7 +113,7 @@ void Map::scale(const double factor)
 double Map::get_total_target_area() const
 {
   double total_target_area = 0.0;
-  for (const auto &region : regions) {
+  for (const auto &region : regions_) {
     total_target_area += region.get_target_area();
   }
   return total_target_area;
@@ -122,7 +122,7 @@ double Map::get_total_target_area() const
 void Map::make_total_target_area_one()
 {
   const double total_target_area = get_total_target_area();
-  for (auto &region : regions) {
+  for (auto &region : regions_) {
     const double cur_target_area = region.get_target_area();
     region.update_target_area(cur_target_area / total_target_area);
   }
@@ -130,14 +130,14 @@ void Map::make_total_target_area_one()
 
 void Map::translate(const double dx, const double dy)
 {
-  for (auto &region : regions) {
+  for (auto &region : regions_) {
     region.translate(dx, dy);
   }
 }
 
 void Map::standardize_each_pwh_independently()
 {
-  for (auto &region : regions) {
+  for (auto &region : regions_) {
     region.standardize_each_pwh_independently();
   }
 }
@@ -147,7 +147,7 @@ void Map::store_target_areas(const std::string target_area_file)
   const std::map<std::string, std::vector<std::string>> csv_data =
     parse_csv(target_area_file);
   auto [header, property_to_target_area] =
-    match_region_target_areas(regions, csv_data);
+    match_region_target_areas(regions_, csv_data);
   update_regions_target_areas(header, property_to_target_area);
 }
 
@@ -155,7 +155,7 @@ void Map::update_regions_target_areas(
   const std::string header,
   const std::map<std::string, double> property_to_target_area)
 {
-  for (auto &region : regions) {
+  for (auto &region : regions_) {
     region.update_target_area(header, property_to_target_area);
   }
 }
@@ -170,7 +170,7 @@ void Map::make_total_area_one()
 double Map::get_xmin() const
 {
   double xmin = std::numeric_limits<double>::max();
-  for (const auto &region : regions) {
+  for (const auto &region : regions_) {
     xmin = std::min(xmin, region.get_xmin());
   }
   return xmin;
@@ -179,7 +179,7 @@ double Map::get_xmin() const
 double Map::get_xmax() const
 {
   double xmax = std::numeric_limits<double>::lowest();
-  for (const auto &region : regions) {
+  for (const auto &region : regions_) {
     xmax = std::max(xmax, region.get_xmax());
   }
   return xmax;
@@ -188,7 +188,7 @@ double Map::get_xmax() const
 double Map::get_ymin() const
 {
   double ymin = std::numeric_limits<double>::max();
-  for (const auto &region : regions) {
+  for (const auto &region : regions_) {
     ymin = std::min(ymin, region.get_ymin());
   }
   return ymin;
@@ -197,7 +197,7 @@ double Map::get_ymin() const
 double Map::get_ymax() const
 {
   double ymax = std::numeric_limits<double>::lowest();
-  for (const auto &region : regions) {
+  for (const auto &region : regions_) {
     ymax = std::max(ymax, region.get_ymax());
   }
   return ymax;

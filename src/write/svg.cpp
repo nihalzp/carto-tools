@@ -1,12 +1,13 @@
 #include "write/svg.h"
 #include <string>
 
-SVG::SVG(const std::string &filename, int w, int h) : width(w), height(h)
+SVG::SVG(const std::string &filename, unsigned int w, unsigned int h)
+    : width_(w), height_(h)
 {
-  svg_file.open(filename);
-  svg_file << "<svg xmlns='http://www.w3.org/2000/svg' "
-           << "width='" << width << "' height='" << height << "' "
-           << "viewBox='0 0 " << width << " " << height << "'>\n";
+  svg_file_.open(filename);
+  svg_file_ << "<svg xmlns='http://www.w3.org/2000/svg' "
+            << "width='" << width_ << "' height='" << height_ << "' "
+            << "viewBox='0 0 " << width_ << " " << height_ << "'>\n";
 }
 
 void SVG::add_segment(
@@ -17,9 +18,9 @@ void SVG::add_segment(
   const std::string &color,
   double stroke_width)
 {
-  svg_file << "<line x1='" << x1 << "' y1='" << height - y1 << "' x2='" << x2
-           << "' y2='" << height - y2 << "' style='stroke:" << color
-           << ";stroke-width:" << stroke_width << "' />\n";
+  svg_file_ << "<line x1='" << x1 << "' y1='" << height_ - y1 << "' x2='" << x2
+            << "' y2='" << height_ - y2 << "' style='stroke:" << color
+            << ";stroke-width:" << stroke_width << "' />\n";
 }
 
 void SVG::add_point(
@@ -28,12 +29,12 @@ void SVG::add_point(
   const std::string &color,
   double radius)
 {
-  svg_file << "<circle cx='" << x << "' cy='" << height - y << "' r='"
-           << radius << "' style='fill:" << color << "' />\n";
+  svg_file_ << "<circle cx='" << x << "' cy='" << height_ - y << "' r='"
+            << radius << "' style='fill:" << color << "' />\n";
 }
 
 SVG::~SVG()
 {
-  svg_file << "</svg>\n";
-  svg_file.close();
+  svg_file_ << "</svg>\n";
+  svg_file_.close();
 }

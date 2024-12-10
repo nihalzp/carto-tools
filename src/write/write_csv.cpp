@@ -15,7 +15,7 @@ std::vector<std::vector<std::string>> extract_csv_rows(const Map &map)
   const auto regions = map.get_regions();
 
   std::vector<std::string> column_names;
-  for (const auto &[header, _] : regions[0].properties) {
+  for (const auto &[header, _] : regions[0].get_properties()) {
     column_names.push_back(header);
   }
 
@@ -25,7 +25,7 @@ std::vector<std::vector<std::string>> extract_csv_rows(const Map &map)
 
   for (const auto &region : regions) {
     std::vector<std::string> row;
-    for (const auto &[_, value] : region.properties) {
+    for (const auto &[_, value] : region.get_properties()) {
       row.push_back(value);
     }
     row.push_back("");

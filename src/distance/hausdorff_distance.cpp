@@ -28,8 +28,8 @@ double calculate_hausdorff_distance(
   double max_distance = 0.0;
 
   for (int i = 0; i < region1.num_pwhs(); ++i) {
-    const auto &pwh1 = region1.pwhs[i];
-    const auto &pwh2 = region2.pwhs[i];
+    const auto &pwh1 = region1.get_pwhs()[i];
+    const auto &pwh2 = region2.get_pwhs()[i];
 
     double outer_distance =
       calculate_hausdorff_distance(pwh1.outer(), pwh2.outer());

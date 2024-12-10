@@ -6,11 +6,11 @@
 class SVG
 {
 private:
-  std::ofstream svg_file;
-  int width, height;
+  std::ofstream svg_file_;
+  unsigned int width_, height_;
 
 public:
-  SVG(const std::string &, int, int);
+  SVG(const std::string &, unsigned int, unsigned int);
 
   void add_segment(
     double,
