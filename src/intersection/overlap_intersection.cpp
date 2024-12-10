@@ -12,7 +12,7 @@ typedef boost::geometry::model::segment<Point> Segment;
 
 bool is_point_part_of_ring(const Point &point, const std::vector<Point> &ring)
 {
-  for (int i = 0; i < ring.size(); ++i) {
+  for (unsigned int i = 0; i < ring.size(); ++i) {
     if (boost::geometry::equals(ring[i], point)) {
       return true;
     }
@@ -41,8 +41,8 @@ std::vector<Point> get_overlap_intersections(const Map &map)
 
   const auto &regions = map.get_regions();
 
-  for (int i = 0; i < regions.size(); ++i) {
-    for (int j = i + 1; j < regions.size(); ++j) {
+  for (unsigned int i = 0; i < regions.size(); ++i) {
+    for (unsigned int j = i + 1; j < regions.size(); ++j) {
       const auto &region_i_pwhs = regions[i].get_pwhs();
       const auto &region_j_pwhs = regions[j].get_pwhs();
 

@@ -74,7 +74,7 @@ std::map<std::string, double> combine_property_with_target_area(
   const std::vector<std::string> &properties)
 {
   std::map<std::string, double> property_to_target_area;
-  for (int i = 0; i < properties.size(); ++i) {
+  for (unsigned int i = 0; i < properties.size(); ++i) {
     property_to_target_area[properties[i]] = stod(target_areas[i]);
   }
   return property_to_target_area;

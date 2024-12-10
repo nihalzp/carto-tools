@@ -14,7 +14,7 @@ typedef boost::geometry::model::segment<Point> Segment;
 std::vector<Segment> collect_segments(const std::vector<Point> &ring)
 {
   std::vector<Segment> segments;
-  for (int i = 0; i < ring.size(); ++i) {
+  for (unsigned int i = 0; i < ring.size(); ++i) {
     segments.emplace_back(ring[i], ring[(i + 1) % ring.size()]);
   }
   return segments;
@@ -55,8 +55,8 @@ std::vector<Point> get_self_intersections(const Polygon_with_holes &pwh)
 
   std::vector<Segment> all_segments = collect_segments(pwh);
 
-  for (int i = 0; i < all_segments.size(); ++i) {
-    for (int j = i + 1; j < all_segments.size(); ++j) {
+  for (unsigned int i = 0; i < all_segments.size(); ++i) {
+    for (unsigned int j = i + 1; j < all_segments.size(); ++j) {
       if (share_endpoint(all_segments[i], all_segments[j])) {
         continue;
       }

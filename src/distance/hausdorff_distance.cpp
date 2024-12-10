@@ -27,7 +27,7 @@ double calculate_hausdorff_distance(
 {
   double max_distance = 0.0;
 
-  for (int i = 0; i < region1.get_num_pwhs(); ++i) {
+  for (unsigned int i = 0; i < region1.get_num_pwhs(); ++i) {
     const auto &pwh1 = region1.get_pwhs()[i];
     const auto &pwh2 = region2.get_pwhs()[i];
 
@@ -35,7 +35,7 @@ double calculate_hausdorff_distance(
       calculate_hausdorff_distance(pwh1.outer(), pwh2.outer());
     max_distance = combiner_maximum(max_distance, outer_distance);
 
-    for (int j = 0; j < pwh1.inners().size(); ++j) {
+    for (unsigned int j = 0; j < pwh1.inners().size(); ++j) {
       double hole_distance =
         calculate_hausdorff_distance(pwh1.inners()[j], pwh2.inners()[j]);
       max_distance = combiner_maximum(max_distance, hole_distance);

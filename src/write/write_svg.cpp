@@ -32,7 +32,7 @@ void plot_line(
   SVG &svg,
   const std::string &color)
 {
-  for (int i = 0; i < pts.size(); ++i) {
+  for (unsigned int i = 0; i < pts.size(); ++i) {
     const auto &p1 = pts[i];
     const auto &p2 = pts[(i + 1) % pts.size()];
     plot(Segment(p1, p2), svg, color);
@@ -41,7 +41,7 @@ void plot_line(
 
 void plot(const std::vector<Point> &pts, SVG &svg, const std::string &color)
 {
-  for (int i = 0; i < pts.size(); ++i) {
+  for (unsigned int i = 0; i < pts.size(); ++i) {
     plot(pts[i], svg, color);
   }
 }
