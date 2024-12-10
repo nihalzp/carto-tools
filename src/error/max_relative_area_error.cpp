@@ -10,7 +10,7 @@ double relative_area_error(const double actual_area, const double target_area)
 
 double relative_area_error(const Region &region)
 {
-  const double actual_area = region.area();
+  const double actual_area = region.compute_area();
   const double target_area = region.get_target_area();
   return relative_area_error(actual_area, target_area);
 }

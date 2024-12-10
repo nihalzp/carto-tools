@@ -20,16 +20,16 @@ Region::Region(
   pwhs_ = extract_pwhs_from_feature(feature);
 }
 
-double Region::area() const
+double Region::compute_area() const
 {
   double total_area = 0.0;
   for (const auto &pwh : pwhs_) {
-    total_area += pwh.area();
+    total_area += pwh.compute_area();
   }
   return total_area;
 }
 
-unsigned int Region::num_pwhs() const
+unsigned int Region::get_num_pwhs() const
 {
   return pwhs_.size();
 }
@@ -98,38 +98,38 @@ bool Region::operator==(const Region &other) const
   return false;
 }
 
-double Region::get_xmin() const
+double Region::compute_xmin() const
 {
   double xmin = std::numeric_limits<double>::max();
   for (const auto &pwh : pwhs_) {
-    xmin = std::min(xmin, pwh.get_xmin());
+    xmin = std::min(xmin, pwh.compute_xmin());
   }
   return xmin;
 }
 
-double Region::get_xmax() const
+double Region::compute_xmax() const
 {
   double xmax = std::numeric_limits<double>::lowest();
   for (const auto &pwh : pwhs_) {
-    xmax = std::max(xmax, pwh.get_xmax());
+    xmax = std::max(xmax, pwh.compute_xmax());
   }
   return xmax;
 }
 
-double Region::get_ymin() const
+double Region::compute_ymin() const
 {
   double ymin = std::numeric_limits<double>::max();
   for (const auto &pwh : pwhs_) {
-    ymin = std::min(ymin, pwh.get_ymin());
+    ymin = std::min(ymin, pwh.compute_ymin());
   }
   return ymin;
 }
 
-double Region::get_ymax() const
+double Region::compute_ymax() const
 {
   double ymax = std::numeric_limits<double>::lowest();
   for (const auto &pwh : pwhs_) {
-    ymax = std::max(ymax, pwh.get_ymax());
+    ymax = std::max(ymax, pwh.compute_ymax());
   }
   return ymax;
 }

@@ -18,7 +18,7 @@ Polygon_with_holes::Polygon_with_holes(
 {
 }
 
-double Polygon_with_holes::area() const
+double Polygon_with_holes::compute_area() const
 {
   return abs(boost::geometry::area(*this));
 }
@@ -49,34 +49,34 @@ void Polygon_with_holes::standardize()
 {
   Point centroid;
   boost::geometry::centroid(*this, centroid);
-  this->translate(-centroid.x(), -centroid.y());
+  translate(-centroid.x(), -centroid.y());
 
-  const double area = this->area();
-  this->scale(1.0 / std::sqrt(std::abs(area)));
+  const double area = compute_area();
+  scale(1.0 / std::sqrt(std::abs(area)));
 }
 
-double Polygon_with_holes::get_xmin() const
+double Polygon_with_holes::compute_xmin() const
 {
   boost::geometry::model::box<Point> bounding_box;
   boost::geometry::envelope(*this, bounding_box);
   return bounding_box.min_corner().get<0>();
 }
 
-double Polygon_with_holes::get_xmax() const
+double Polygon_with_holes::compute_xmax() const
 {
   boost::geometry::model::box<Point> bounding_box;
   boost::geometry::envelope(*this, bounding_box);
   return bounding_box.max_corner().get<0>();
 }
 
-double Polygon_with_holes::get_ymin() const
+double Polygon_with_holes::compute_ymin() const
 {
   boost::geometry::model::box<Point> bounding_box;
   boost::geometry::envelope(*this, bounding_box);
   return bounding_box.min_corner().get<1>();
 }
 
-double Polygon_with_holes::get_ymax() const
+double Polygon_with_holes::compute_ymax() const
 {
   boost::geometry::model::box<Point> bounding_box;
   boost::geometry::envelope(*this, bounding_box);

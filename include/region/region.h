@@ -15,7 +15,7 @@ private:
 
 public:
   Region(const nlohmann::json, const std::vector<std::string>);
-  double area() const;
+  double compute_area() const;
   void scale(const double);
   void translate(const double, const double);
   void standardize_each_pwh_independently();
@@ -24,12 +24,12 @@ public:
     const std::map<std::string, double>);
   void update_target_area(const double);
   double get_target_area() const;
-  unsigned int num_pwhs() const;
+  unsigned int get_num_pwhs() const;
   bool operator==(const Region &) const;
-  double get_xmin() const;
-  double get_xmax() const;
-  double get_ymin() const;
-  double get_ymax() const;
+  double compute_xmin() const;
+  double compute_xmax() const;
+  double compute_ymin() const;
+  double compute_ymax() const;
   const std::map<std::string, std::string> &get_properties() const;
   const std::vector<Polygon_with_holes> &get_pwhs() const;
 };

@@ -13,7 +13,7 @@ private:
 
 public:
   Map(std::string);
-  double area();
+  double compute_area();
   std::string get_map_name() const;
   void make_total_area_one();
   void scale(const double);
@@ -27,9 +27,9 @@ public:
   void make_total_target_area_one();
   double get_total_target_area() const;
   Region find_matching_region(const Region &) const;
-  double get_xmin() const;
-  double get_xmax() const;
-  double get_ymin() const;
-  double get_ymax() const;
+  double compute_xmin() const;
+  double compute_xmax() const;
+  double compute_ymin() const;
+  double compute_ymax() const;
   void adjust_map_for_plotting();
 };

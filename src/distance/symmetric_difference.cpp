@@ -13,7 +13,7 @@ double calculate_symmetric_difference(
 {
   double total_symmetric_difference = 0.0;
 
-  for (int i = 0; i < region1.num_pwhs(); ++i) {
+  for (int i = 0; i < region1.get_num_pwhs(); ++i) {
     const auto &pwh1 = region1.get_pwhs()[i];
     const auto &pwh2 = region2.get_pwhs()[i];
 
@@ -21,7 +21,7 @@ double calculate_symmetric_difference(
     boost::geometry::sym_difference(pwh1, pwh2, sym_difference_result);
 
     for (const auto &diff_poly : sym_difference_result) {
-      total_symmetric_difference += diff_poly.area();
+      total_symmetric_difference += diff_poly.compute_area();
     }
   }
 

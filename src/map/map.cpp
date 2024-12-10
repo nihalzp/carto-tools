@@ -18,11 +18,11 @@ Map::Map(std::string geofile)
   map_name_ = geofile.substr(0, geofile.find_last_of("."));
 }
 
-double Map::area()
+double Map::compute_area()
 {
   double total_area = 0.0;
   for (const auto &region : regions_) {
-    total_area += region.area();
+    total_area += region.compute_area();
   }
   return total_area;
 };
@@ -162,53 +162,53 @@ void Map::update_regions_target_areas(
 
 void Map::make_total_area_one()
 {
-  const double total_area = area();
+  const double total_area = compute_area();
   const double scale_factor = 1.0 / std::sqrt(total_area);
   scale(scale_factor);
 }
 
-double Map::get_xmin() const
+double Map::compute_xmin() const
 {
   double xmin = std::numeric_limits<double>::max();
   for (const auto &region : regions_) {
-    xmin = std::min(xmin, region.get_xmin());
+    xmin = std::min(xmin, region.compute_xmin());
   }
   return xmin;
 }
 
-double Map::get_xmax() const
+double Map::compute_xmax() const
 {
   double xmax = std::numeric_limits<double>::lowest();
   for (const auto &region : regions_) {
-    xmax = std::max(xmax, region.get_xmax());
+    xmax = std::max(xmax, region.compute_xmax());
   }
   return xmax;
 }
 
-double Map::get_ymin() const
+double Map::compute_ymin() const
 {
   double ymin = std::numeric_limits<double>::max();
   for (const auto &region : regions_) {
-    ymin = std::min(ymin, region.get_ymin());
+    ymin = std::min(ymin, region.compute_ymin());
   }
   return ymin;
 }
 
-double Map::get_ymax() const
+double Map::compute_ymax() const
 {
   double ymax = std::numeric_limits<double>::lowest();
   for (const auto &region : regions_) {
-    ymax = std::max(ymax, region.get_ymax());
+    ymax = std::max(ymax, region.compute_ymax());
   }
   return ymax;
 }
 
 void Map::adjust_map_for_plotting()
 {
-  const double xmin = get_xmin();
-  const double xmax = get_xmax();
-  const double ymin = get_ymin();
-  const double ymax = get_ymax();
+  const double xmin = compute_xmin();
+  const double xmax = compute_xmax();
+  const double ymin = compute_ymin();
+  const double ymax = compute_ymax();
 
   const double map_width = xmax - xmin;
   const double map_height = ymax - ymin;
@@ -224,10 +224,10 @@ void Map::adjust_map_for_plotting()
 
   translate(dx, dy);
 
-  const double new_xmin = get_xmin();
-  const double new_xmax = get_xmax();
-  const double new_ymin = get_ymin();
-  const double new_ymax = get_ymax();
+  const double new_xmin = compute_xmin();
+  const double new_xmax = compute_xmax();
+  const double new_ymin = compute_ymin();
+  const double new_ymax = compute_ymax();
 
   const double translated_width = new_xmax - new_xmin;
   const double translated_height = new_ymax - new_ymin;
