@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(third_party)
 
+cmake_policy(SET CMP0167 NEW)
 find_package(Boost REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIRS})
