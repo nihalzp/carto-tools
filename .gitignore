@@ -1,0 +1,78 @@
+# General OS-specific files
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Windows
+ehthumbs.db
+Icon?
+*.stackdump
+
+# Linux
+*~
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# C++ build artifacts
+*.o
+*.obj
+*.so
+*.a
+*.lib
+*.dll
+*.exe
+*.out
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Build directories
+build/
+bin/
+lib/
+
+# IDEs and Editors
+.vscode/
+*.code-workspace
+.idea/
+*.iml
+*.swp
+*.swo
+*.swn
+*.tmp
+*.user
+*.ncb
+*.sdf
+*.vcxproj*
+*.xcodeproj
+*.ipch
+*.pdb
+*.idx
+*.tlog
+
+# Logs
+*.log
+
+# Generated files
+*.gch
+*.pch
+*.dSYM/
+*.coverage
+
+# Backup files
+*.bak
+
+# Temporary files
+*.tmp
+*.temp
+
+# System-specific files
+.trash/
+
+# Generated Image Files
+*.svg
