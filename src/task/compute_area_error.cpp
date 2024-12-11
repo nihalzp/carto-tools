@@ -8,13 +8,17 @@
 
 void compute_area_error(const argparse::ArgumentParser &arguments)
 {
-  std::string geo_file = arguments.get<std::string>("--map_1");
+  const std::string geo_file = arguments.get<std::string>("--map");
+
+  const std::string target_area_file =
+    arguments.get<std::string>("--target_area_csv");
+
+  std::cout << "Calculating area error::\n";
+  std::cout << "GeoJSON File: " << geo_file << "\n";
+  std::cout << "Target Area CSV File: " << target_area_file << "\n";
 
   Map map(geo_file);
   map.make_total_area_one();
-
-  std::string target_area_file =
-    arguments.get<std::string>("--target_area_csv");
 
   map.store_target_areas(target_area_file);
   map.make_total_target_area_one();

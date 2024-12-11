@@ -5,8 +5,9 @@
 
 int main(int argc, char *argv[])
 {
+  argparse::ArgumentParser arguments = parse_arguments(argc, argv);
+
   try {
-    argparse::ArgumentParser arguments = parse_arguments(argc, argv);
     TaskHandler handler(std::move(arguments));
     handler.run_task();
   } catch (const std::exception &e) {

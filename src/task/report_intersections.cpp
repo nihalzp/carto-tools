@@ -9,7 +9,10 @@
 
 void report_intersections(const argparse::ArgumentParser &arguments)
 {
-  std::string geo_file = arguments.get<std::string>("--map_1");
+  const std::string geo_file = arguments.get<std::string>("--map");
+
+  std::cout << "Calculating intersection report for the GeoJSON file:\n";
+  std::cout << "GeoJSON File: " << geo_file << "\n";
 
   Map map(geo_file);
   map.adjust_map_for_plotting();

@@ -74,6 +74,9 @@ void plot_map_with_intersections(
   const std::vector<Point> &overlap_intersections)
 {
   const std::string svg_filename = map.get_map_name() + "_intersections.svg";
+
+  std::cout << "Writing Intersections SVG file: " << svg_filename << "\n";
+
   SVG svg(svg_filename, 512, 512);
 
   plot(map, svg, "black");

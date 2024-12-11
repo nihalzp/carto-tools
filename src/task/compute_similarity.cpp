@@ -9,12 +9,12 @@
 
 void compute_similarity(const argparse::ArgumentParser &arguments)
 {
-  std::string geo_file_1 = arguments.get<std::string>("--map_1");
-  std::string geo_file_2 = arguments.get<std::string>("--map_2");
+  const std::string geo_file_1 = arguments.get<std::string>("--map_1");
+  const std::string geo_file_2 = arguments.get<std::string>("--map_2");
 
-  std::cout << "Comparing files:\n";
-  std::cout << "File 1: " << geo_file_1 << "\n";
-  std::cout << "File 2: " << geo_file_2 << "\n";
+  std::cout << "Calculating similarity between two GeoJSONs:\n";
+  std::cout << "GeoJSON File 1: " << geo_file_1 << "\n";
+  std::cout << "GeoJSON File 2: " << geo_file_2 << "\n";
 
   Map map1(geo_file_1);
   Map map2(geo_file_2);
@@ -22,9 +22,10 @@ void compute_similarity(const argparse::ArgumentParser &arguments)
   map1.standardize_each_pwh_independently();
   map2.standardize_each_pwh_independently();
 
-  double frechet_distance = calculate_frechet_distance(map1, map2);
-  double hausdorff_distance = calculate_hausdorff_distance(map1, map2);
-  double symmetric_difference = calculate_symmetric_difference(map1, map2);
+  const double frechet_distance = calculate_frechet_distance(map1, map2);
+  const double hausdorff_distance = calculate_hausdorff_distance(map1, map2);
+  const double symmetric_difference =
+    calculate_symmetric_difference(map1, map2);
 
   std::cout << "Frechet distance: " << frechet_distance << "\n";
   std::cout << "Hausdorff distance: " << hausdorff_distance << "\n";
