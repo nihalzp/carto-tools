@@ -1,98 +1,18 @@
-#include "distance/frechet_distance.hpp"
-#include "distance/hausdorff_distance.hpp"
-#include "distance/symmetric_difference.hpp"
-#include "error/area_weighted_mean_error.hpp"
-#include "error/max_relative_area_error.hpp"
-#include "intersection/overlap_intersection.hpp"
-#include "intersection/self_intersection.hpp"
-#include "map/map.hpp"
 #include "parse/parse_arguments.hpp"
-#include "write/write_csv.hpp"
-#include "write/write_svg.hpp"
+#include "task_handler/task_handler.hpp"
 #include <argparse/argparse.hpp>
-#include <cmath>
 #include <iostream>
-#include <map>
-#include <set>
-#include <string>
-#include <vector>
 
 int main(int argc, char *argv[])
 {
-  argparse::ArgumentParser arguments = parse_arguments(argc, argv);
-
-  if (arguments.get<bool>("--similarity")) {
-    std::string geofile1 = arguments.get<std::string>("--map_1");
-    std::string geofile2 = arguments.get<std::string>("--map_2");
-
-    std::cout << "Comparing files:\n";
-    std::cout << "File 1: " << geofile1 << "\n";
-    std::cout << "File 2: " << geofile2 << "\n";
-
-    Map map1(geofile1);
-    Map map2(geofile2);
-
-    map1.standardize_each_pwh_independently();
-    map2.standardize_each_pwh_independently();
-
-    double frechet_distance = calculate_frechet_distance(map1, map2);
-    double hausdorff_distance = calculate_hausdorff_distance(map1, map2);
-    double symmetric_difference = calculate_symmetric_difference(map1, map2);
-
-    std::cout << "Frechet distance: " << frechet_distance << "\n";
-    std::cout << "Hausdorff distance: " << hausdorff_distance << "\n";
-    std::cout << "Symmetric difference: " << symmetric_difference << "\n";
-
-    return 0;
+  try {
+    argparse::ArgumentParser arguments = parse_arguments(argc, argv);
+    TaskHandler handler(std::move(arguments));
+    handler.run_task();
+  } catch (const std::exception &e) {
+    std::cerr << "Error: " << e.what() << "\n";
+    return EXIT_FAILURE;
   }
 
-  if (arguments.get<bool>("--create_csv")) {
-    std::string geofile = arguments.get<std::string>("--map_1");
-
-    Map map(geofile);
-
-    write_csv(map);
-    return 0;
-  }
-
-  if (arguments.get<bool>("--area_error")) {
-    std::string geofile = arguments.get<std::string>("--map_1");
-
-    Map map(geofile);
-    map.make_total_area_one();
-
-    std::string target_area_file =
-      arguments.get<std::string>("--cart_area_csv");
-
-    map.store_target_areas(target_area_file);
-    map.make_total_target_area_one();
-
-    print_max_relative_area_error_report(map);
-    print_area_weighted_mean_error(map);
-    return 0;
-  }
-
-  if (arguments.get<bool>("--intersection")) {
-    std::string geofile = arguments.get<std::string>("--map_1");
-
-    Map map(geofile);
-
-    map.adjust_map_for_plotting();
-
-    const std::vector<Point> self_intersections = get_self_intersections(map);
-    const std::vector<Point> overlap_intersections =
-      get_overlap_intersections(map);
-
-    std::cout << "Number of self-intersection points: "
-              << self_intersections.size() << "\n";
-
-    std::cout << "Number of overlap intersection points: "
-              << overlap_intersections.size() << "\n";
-
-    plot_map_with_intersections(
-      map,
-      self_intersections,
-      overlap_intersections);
-    return 0;
-  }
+  return EXIT_SUCCESS;
 }
