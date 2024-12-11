@@ -1,6 +1,7 @@
 #include "distance/hausdorff_distance.hpp"
 #include "distance/distance.hpp"
 #include "map/map.hpp"
+#include "polygon_with_holes/polygon_with_holes.hpp"
 #include "region/region.hpp"
 #include <boost/geometry.hpp>
 #include <boost/geometry/algorithms/discrete_hausdorff_distance.hpp>
@@ -28,8 +29,8 @@ double calculate_hausdorff_distance(
   double max_distance = 0.0;
 
   for (unsigned int i = 0; i < region1.get_num_pwhs(); ++i) {
-    const auto &pwh1 = region1.get_pwhs()[i];
-    const auto &pwh2 = region2.get_pwhs()[i];
+    const Polygon_with_holes &pwh1 = region1.get_pwhs()[i];
+    const Polygon_with_holes &pwh2 = region2.get_pwhs()[i];
 
     double outer_distance =
       calculate_hausdorff_distance(pwh1.outer(), pwh2.outer());

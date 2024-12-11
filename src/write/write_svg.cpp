@@ -33,8 +33,8 @@ void plot_line(
   const std::string &color)
 {
   for (unsigned int i = 0; i < pts.size(); ++i) {
-    const auto &p1 = pts[i];
-    const auto &p2 = pts[(i + 1) % pts.size()];
+    const Point &p1 = pts[i];
+    const Point &p2 = pts[(i + 1) % pts.size()];
     plot(Segment(p1, p2), svg, color);
   }
 }

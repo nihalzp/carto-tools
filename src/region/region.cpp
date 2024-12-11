@@ -11,7 +11,7 @@ Region::Region(
   const std::vector<std::string> &unique_property_headers)
 {
   for (const auto &header : unique_property_headers) {
-    auto property_json = feature["properties"][header];
+    const nlohmann::json &property_json = feature["properties"][header];
     std::string property = property_json.is_string()
                              ? property_json.get<std::string>()
                              : property_json.dump();
@@ -25,8 +25,8 @@ bool Region::operator==(const Region &other) const
   if (properties_ == other.get_properties()) {
     return true;
   }
-  for (auto &[header, property] : properties_) {
-    for (auto &[other_header, other_property] : other.get_properties()) {
+  for (const auto &[header, property] : properties_) {
+    for (const auto &[other_header, other_property] : other.get_properties()) {
       if (property == other_property) {
         return true;
       }

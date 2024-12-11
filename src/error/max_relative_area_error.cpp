@@ -17,7 +17,7 @@ double relative_area_error(const Region &region)
 
 void print_relative_area_error_region(const Region &region)
 {
-  for (auto [_, property] : region.get_properties()) {
+  for (const auto &[_, property] : region.get_properties()) {
     std::cout << property << ", ";
   }
   std::cout << ": " << relative_area_error(region) << std::endl;
@@ -26,7 +26,7 @@ void print_relative_area_error_region(const Region &region)
 double max_relative_area_error(const Map &map)
 {
   double rel_area_error = 0.0;
-  for (auto const &region : map.get_regions()) {
+  for (const auto &region : map.get_regions()) {
     rel_area_error = std::max(rel_area_error, relative_area_error(region));
   }
   return rel_area_error;

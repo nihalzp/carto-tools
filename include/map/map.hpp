@@ -19,7 +19,7 @@ public:
   double compute_xmin() const;
   double compute_ymax() const;
   double compute_ymin() const;
-  Region find_matching_region(const Region &) const;
+  const Region &find_matching_region(const Region &) const;
   std::string get_map_name() const;
   const std::vector<Region> &get_regions() const;
   double compute_total_target_area() const;

@@ -87,7 +87,7 @@ static std::pair<bool, std::string> find_matching_property_header(
       }
     }
   }
-  for (auto &[header, property_st] : matched_properties) {
+  for (const auto &[header, property_st] : matched_properties) {
     if (property_st.size() == regions.size()) {
       return {true, header};
     }
@@ -118,8 +118,9 @@ match_region_target_areas(
   }
   const std::vector<std::string> target_areas =
     csv_data.at(target_area_col_name);
-  for (auto &[_, properties] : csv_data) {
-    auto [match, header] = find_matching_property_header(regions, properties);
+  for (const auto &[_, properties] : csv_data) {
+    const auto [match, header] =
+      find_matching_property_header(regions, properties);
     if (match) {
       return std::make_pair(
         header,
@@ -134,7 +135,7 @@ void Map::store_target_areas(const std::string &target_area_file)
 {
   const std::map<std::string, std::vector<std::string>> csv_data =
     parse_csv(target_area_file);
-  auto [header, property_to_target_area] =
+  const auto [header, property_to_target_area] =
     match_region_target_areas(regions_, csv_data);
   update_regions_target_areas(header, property_to_target_area);
 }
@@ -238,7 +239,7 @@ void Map::adjust_map_for_plotting()
   translate(target_center_x, target_center_y);
 }
 
-Region Map::find_matching_region(const Region &other_region) const
+const Region &Map::find_matching_region(const Region &other_region) const
 {
   for (const auto &region : regions_) {
     if (region == other_region) {

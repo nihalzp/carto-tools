@@ -24,14 +24,14 @@ std::vector<Segment> collect_segments(const Polygon_with_holes &pwh)
 {
   std::vector<Segment> segments;
 
-  auto outer_segments = collect_segments(pwh.outer());
+  std::vector<Segment> outer_segments = collect_segments(pwh.outer());
   segments.insert(
     segments.end(),
     outer_segments.begin(),
     outer_segments.end());
 
   for (const auto &inner_ring : pwh.inners()) {
-    auto inner_segments = collect_segments(inner_ring);
+    std::vector<Segment> inner_segments = collect_segments(inner_ring);
     segments.insert(
       segments.end(),
       inner_segments.begin(),

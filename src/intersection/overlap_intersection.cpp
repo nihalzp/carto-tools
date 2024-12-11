@@ -39,12 +39,14 @@ std::vector<Point> get_overlap_intersections(const Map &map)
 {
   std::vector<Point> overlap_intersections;
 
-  const auto &regions = map.get_regions();
+  const std::vector<Region> &regions = map.get_regions();
 
   for (unsigned int i = 0; i < regions.size(); ++i) {
     for (unsigned int j = i + 1; j < regions.size(); ++j) {
-      const auto &region_i_pwhs = regions[i].get_pwhs();
-      const auto &region_j_pwhs = regions[j].get_pwhs();
+      const std::vector<Polygon_with_holes> &region_i_pwhs =
+        regions[i].get_pwhs();
+      const std::vector<Polygon_with_holes> &region_j_pwhs =
+        regions[j].get_pwhs();
 
       for (const auto &pwh1 : region_i_pwhs) {
         for (const auto &pwh2 : region_j_pwhs) {

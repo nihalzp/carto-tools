@@ -12,7 +12,7 @@ std::vector<std::vector<std::string>> extract_csv_rows(const Map &map)
 {
   std::vector<std::vector<std::string>> csv_rows;
 
-  const auto regions = map.get_regions();
+  const std::vector<Region> &regions = map.get_regions();
 
   std::vector<std::string> column_names;
   for (const auto &[header, _] : regions[0].get_properties()) {
@@ -43,7 +43,7 @@ void write_csv(const Map &map)
 
   std::ofstream out_file_csv(csv_file_name);
 
-  auto csv_rows = extract_csv_rows(map);
+  std::vector<std::vector<std::string>> csv_rows = extract_csv_rows(map);
 
   auto writer = csv::make_csv_writer(out_file_csv);
 

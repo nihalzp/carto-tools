@@ -21,8 +21,8 @@ double calculate_distance(
   const std::function<double(const double, const double)> &combiner)
 {
   double distance = 0.0;
-  for (auto &region1 : map1.get_regions()) {
-    auto region2 = map2.find_matching_region(region1);
+  for (const auto &region1 : map1.get_regions()) {
+    const Region &region2 = map2.find_matching_region(region1);
     distance = combiner(distance, distance_calculator(region1, region2));
   }
   return distance;

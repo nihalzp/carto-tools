@@ -37,7 +37,7 @@ std::vector<std::string> extract_unique_property_headers(
     }
   }
   std::vector<std::string> unique_property_headers;
-  for (auto &[header, property_st] : properties) {
+  for (const auto &[header, property_st] : properties) {
     if (property_st.size() == num_regions) {
       unique_property_headers.push_back(header);
     }
@@ -49,7 +49,7 @@ Polygon_with_holes extract_pwh(const nlohmann::json &coordinates)
 {
   Polygon_with_holes pwh;
 
-  const auto outer = coordinates[0];
+  const nlohmann::json &outer = coordinates[0];
   for (const auto &point : outer) {
     pwh.outer().push_back(
       Point(point[0].get<double>(), point[1].get<double>()));
@@ -69,16 +69,16 @@ std::vector<Polygon_with_holes> extract_pwhs_from_feature(
 {
   std::vector<Polygon_with_holes> pwhs;
 
-  auto geometry = feature["geometry"];
+  const nlohmann::json &geometry = feature["geometry"];
 
   if (geometry["type"] == "MultiPolygon") {
-    const auto coordinates_collection = geometry["coordinates"];
+    const nlohmann::json &coordinates_collection = geometry["coordinates"];
 
     for (const auto &coordinates : coordinates_collection) {
       pwhs.push_back(extract_pwh(coordinates));
     }
   } else if (geometry["type"] == "Polygon") {
-    const auto coordinates = geometry["coordinates"];
+    const nlohmann::json &coordinates = geometry["coordinates"];
     pwhs.push_back(extract_pwh(coordinates));
   }
   return pwhs;
