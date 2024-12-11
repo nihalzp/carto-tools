@@ -12,6 +12,6 @@ public:
   void run_task();
 
 private:
-  argparse::ArgumentParser arguments;
-  std::unordered_map<std::string, std::function<void()>> task_map;
+  argparse::ArgumentParser arguments_;
+  std::unordered_map<std::string, std::function<void()>> task_map_;
 };

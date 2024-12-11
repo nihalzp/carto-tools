@@ -6,30 +6,30 @@
 #include <argparse/argparse.hpp>
 
 TaskHandler::TaskHandler(argparse::ArgumentParser &&args)
-    : arguments(std::move(args))
+    : arguments_(std::move(args))
 {
-  task_map = {
+  task_map_ = {
     {"--similarity",
      [this]() {
-       compute_similarity(arguments);
+       compute_similarity(arguments_);
      }},
     {"--create_csv",
      [this]() {
-       generate_target_csv(arguments);
+       generate_target_csv(arguments_);
      }},
     {"--area_error",
      [this]() {
-       compute_area_error(arguments);
+       compute_area_error(arguments_);
      }},
     {"--intersection", [this]() {
-       report_intersections(arguments);
+       report_intersections(arguments_);
      }}};
 }
 
 void TaskHandler::run_task()
 {
-  for (const auto &task : task_map) {
-    if (arguments.get<bool>(task.first)) {
+  for (const auto &task : task_map_) {
+    if (arguments_.get<bool>(task.first)) {
       task.second();
       return;
     }
