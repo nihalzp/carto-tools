@@ -13,7 +13,7 @@ void compute_area_error(const argparse::ArgumentParser &arguments)
   const std::string target_area_file =
     arguments.get<std::string>("--target_area_csv");
 
-  std::cout << "Calculating area error::\n";
+  std::cout << "Calculating area error:\n";
   std::cout << "GeoJSON File: " << geo_file << "\n";
   std::cout << "Target Area CSV File: " << target_area_file << "\n";
 
