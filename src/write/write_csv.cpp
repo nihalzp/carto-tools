@@ -37,9 +37,9 @@ std::vector<std::vector<std::string>> extract_csv_rows(const Map &map)
 
 void write_csv(const Map &map)
 {
-  std::string csv_file_name = map.get_map_name() + ".csv";
+  const std::string csv_file_name = map.get_map_name() + "_template.csv";
 
-  std::cout << "Writing CSV file: " << csv_file_name << "\n";
+  std::cout << "Writing Target Template CSV File: " << csv_file_name << "\n";
 
   std::ofstream out_file_csv(csv_file_name);
 
