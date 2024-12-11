@@ -11,7 +11,7 @@
 #include <utility>
 #include <vector>
 
-Map::Map(std::string geofile)
+Map::Map(const std::string &geofile)
 {
   const nlohmann::json geojson = read_geojson(geofile);
   regions_ = extract_regions(geojson);
@@ -28,7 +28,7 @@ const std::vector<Region> &Map::get_regions() const
   return regions_;
 }
 
-double Map::compute_area()
+double Map::compute_area() const
 {
   double total_area = 0.0;
   for (const auto &region : regions_) {
@@ -109,7 +109,7 @@ static std::map<std::string, double> combine_property_with_target_area(
 static std::pair<std::string, std::map<std::string, double>>
 match_region_target_areas(
   const std::vector<Region> &regions,
-  const std::map<std::string, std::vector<std::string>> csv_data)
+  const std::map<std::string, std::vector<std::string>> &csv_data)
 {
   const std::string target_area_col_name = "Cartogram Data (eg. Population)";
   if (csv_data.count(target_area_col_name) == 0) {
@@ -130,7 +130,7 @@ match_region_target_areas(
     "No matching property found in GeoJSON for the columns given in the CSV.");
 }
 
-void Map::store_target_areas(const std::string target_area_file)
+void Map::store_target_areas(const std::string &target_area_file)
 {
   const std::map<std::string, std::vector<std::string>> csv_data =
     parse_csv(target_area_file);
@@ -140,8 +140,8 @@ void Map::store_target_areas(const std::string target_area_file)
 }
 
 void Map::update_regions_target_areas(
-  const std::string header,
-  const std::map<std::string, double> property_to_target_area)
+  const std::string &header,
+  const std::map<std::string, double> &property_to_target_area)
 {
   for (auto &region : regions_) {
     region.update_target_area(header, property_to_target_area);

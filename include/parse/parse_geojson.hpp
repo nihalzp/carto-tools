@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 
-std::vector<Polygon_with_holes> extract_pwhs_from_feature(nlohmann::json);
-std::vector<Region> extract_regions(nlohmann::json);
+std::vector<Polygon_with_holes> extract_pwhs_from_feature(
+  const nlohmann::json &);
+std::vector<Region> extract_regions(const nlohmann::json &);
 nlohmann::json read_geojson(const std::string &);

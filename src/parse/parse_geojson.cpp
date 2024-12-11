@@ -24,7 +24,7 @@ nlohmann::json read_geojson(const std::string &geofile)
 }
 
 std::vector<std::string> extract_unique_property_headers(
-  nlohmann::json geojson)
+  const nlohmann::json &geojson)
 {
   std::map<std::string, std::set<std::string>> properties;
   const unsigned int num_regions = geojson["features"].size();
@@ -45,7 +45,7 @@ std::vector<std::string> extract_unique_property_headers(
   return unique_property_headers;
 }
 
-Polygon_with_holes extract_pwh(nlohmann::json coordinates)
+Polygon_with_holes extract_pwh(const nlohmann::json &coordinates)
 {
   Polygon_with_holes pwh;
 
@@ -65,7 +65,7 @@ Polygon_with_holes extract_pwh(nlohmann::json coordinates)
 }
 
 std::vector<Polygon_with_holes> extract_pwhs_from_feature(
-  nlohmann::json feature)
+  const nlohmann::json &feature)
 {
   std::vector<Polygon_with_holes> pwhs;
 
@@ -84,7 +84,7 @@ std::vector<Polygon_with_holes> extract_pwhs_from_feature(
   return pwhs;
 }
 
-std::vector<Region> extract_regions(nlohmann::json geojson)
+std::vector<Region> extract_regions(const nlohmann::json &geojson)
 {
   std::vector<Region> regions;
   std::vector<std::string> unique_property_headers =

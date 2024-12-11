@@ -12,9 +12,9 @@ private:
   std::vector<Region> regions_;
 
 public:
-  Map(std::string);
+  Map(const std::string &);
   void adjust_map_for_plotting();
-  double compute_area();
+  double compute_area() const;
   double compute_xmax() const;
   double compute_xmin() const;
   double compute_ymax() const;
@@ -27,9 +27,9 @@ public:
   void make_total_target_area_one();
   void scale(const double);
   void standardize_each_pwh_independently();
-  void store_target_areas(const std::string);
+  void store_target_areas(const std::string &);
   void translate(const double, const double);
   void update_regions_target_areas(
-    const std::string,
-    const std::map<std::string, double>);
+    const std::string &,
+    const std::map<std::string, double> &);
 };

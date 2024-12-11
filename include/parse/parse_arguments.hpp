@@ -2,4 +2,4 @@
 
 #include <argparse/argparse.hpp>
 
-argparse::ArgumentParser parse_arguments(int, char *[]);
+argparse::ArgumentParser parse_arguments(const int, char *[]);

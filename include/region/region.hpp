@@ -14,7 +14,7 @@ private:
   double target_area_;
 
 public:
-  Region(const nlohmann::json, const std::vector<std::string>);
+  Region(const nlohmann::json &, const std::vector<std::string> &);
   double compute_area() const;
   double compute_xmax() const;
   double compute_xmin() const;
@@ -30,6 +30,6 @@ public:
   void translate(const double, const double);
   void update_target_area(const double);
   void update_target_area(
-    const std::string,
-    const std::map<std::string, double>);
+    const std::string &,
+    const std::map<std::string, double> &);
 };

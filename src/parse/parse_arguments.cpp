@@ -35,7 +35,7 @@ void add_arguments(argparse::ArgumentParser &arguments)
     .help("Cartogram csv data to be used for area error calculation");
 }
 
-argparse::ArgumentParser parse_arguments(int argc, char *argv[])
+argparse::ArgumentParser parse_arguments(const int argc, char *argv[])
 {
   argparse::ArgumentParser arguments;
   add_arguments(arguments);

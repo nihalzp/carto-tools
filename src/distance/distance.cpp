@@ -18,7 +18,7 @@ double calculate_distance(
   const Map &map2,
   const std::function<double(const Region &, const Region &)>
     &distance_calculator,
-  const std::function<double(double, double)> &combiner)
+  const std::function<double(const double, const double)> &combiner)
 {
   double distance = 0.0;
   for (auto &region1 : map1.get_regions()) {

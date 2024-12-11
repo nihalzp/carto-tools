@@ -7,8 +7,8 @@
 #include <vector>
 
 Region::Region(
-  nlohmann::json feature,
-  std::vector<std::string> unique_property_headers)
+  const nlohmann::json &feature,
+  const std::vector<std::string> &unique_property_headers)
 {
   for (const auto &header : unique_property_headers) {
     auto property_json = feature["properties"][header];
@@ -56,8 +56,8 @@ double Region::get_target_area() const
 }
 
 void Region::update_target_area(
-  const std::string header,
-  const std::map<std::string, double> property_to_target_area)
+  const std::string &header,
+  const std::map<std::string, double> &property_to_target_area)
 {
   double target_area = property_to_target_area.at(properties_.at(header));
   this->update_target_area(target_area);

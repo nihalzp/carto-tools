@@ -10,14 +10,18 @@ private:
   unsigned int width_, height_;
 
 public:
-  SVG(const std::string &, unsigned int, unsigned int);
-  void add_point(double, double, const std::string & = "red", double = 0.9);
+  SVG(const std::string &, const unsigned int, const unsigned int);
+  void add_point(
+    const double,
+    const double,
+    const std::string & = "red",
+    const double = 0.9);
   void add_segment(
-    double,
-    double,
-    double,
-    double,
+    const double,
+    const double,
+    const double,
+    const double,
     const std::string & = "black",
-    double = 0.4);
+    const double = 0.4);
   ~SVG();
 };
