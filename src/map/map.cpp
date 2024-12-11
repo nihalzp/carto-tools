@@ -126,7 +126,8 @@ match_region_target_areas(
         combine_property_with_target_area(target_areas, properties));
     }
   }
-  throw std::runtime_error("No matching property found.");
+  throw std::runtime_error(
+    "No matching property found in GeoJSON for the columns given in the CSV.");
 }
 
 void Map::store_target_areas(const std::string target_area_file)
@@ -244,5 +245,6 @@ Region Map::find_matching_region(const Region &other_region) const
       return region;
     }
   }
-  throw std::runtime_error("No matching region found.");
+  throw std::runtime_error(
+    "Regions could not be matched between two GeoJSON.");
 }

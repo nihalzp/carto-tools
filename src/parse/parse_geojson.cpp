@@ -14,7 +14,7 @@ nlohmann::json read_geojson(const std::string &geofile)
   std::ifstream file(geofile);
 
   if (!file.is_open()) {
-    throw std::runtime_error("Error: Could not open file " + geofile);
+    throw std::runtime_error("Could not open file " + geofile);
   }
 
   file >> geojson;
