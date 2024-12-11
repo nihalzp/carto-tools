@@ -31,7 +31,7 @@ void add_arguments(argparse::ArgumentParser &arguments)
 
   arguments.add_argument("--map_2", "-m2").help("Second GeoJSON file");
 
-  arguments.add_argument("--cart_area_csv", "-cd")
+  arguments.add_argument("--target_area_csv", "-tac")
     .help("Cartogram csv data to be used for area error calculation");
 }
 
