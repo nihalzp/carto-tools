@@ -23,6 +23,26 @@ sudo apt update
 sudo apt install cmake make libboost-all-dev
 ```
 
+### For Docker Ubuntu
+
+Build the Docker image using the provided `Dockerfile`:
+
+```bash
+docker build -t carto-tools .
+```
+
+Create and run the Docker container with Volume Mounting:
+
+```bash
+docker run -it --name carto-container -v $(pwd):/app carto-tools
+```
+
+For consecutive runs, start the container:
+
+```bash
+docker start -ai carto-container
+```
+
 ---
 
 ## Build and Install Instructions
