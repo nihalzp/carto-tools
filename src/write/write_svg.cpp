@@ -6,6 +6,7 @@
 #include <boost/geometry/geometries/point_xy.hpp>
 #include <boost/geometry/geometries/polygon.hpp>
 #include <boost/geometry/geometries/segment.hpp>
+#include <iostream>
 #include <string>
 #include <vector>
 
