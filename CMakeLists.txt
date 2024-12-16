@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.22)
 project(Carto LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -7,7 +7,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_COLOR_DIAGNOSTICS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-cmake_policy(SET CMP0167 NEW)
 find_package(Boost REQUIRED)
 
 set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
