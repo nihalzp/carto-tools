@@ -1,6 +1,7 @@
 #include "write/write_csv.hpp"
 #include "map/map.hpp"
 #include "region/region.hpp"
+#include "constants.hpp"
 #include <csv_parser/csv.hpp>
 #include <fstream>
 #include <iostream>
@@ -19,7 +20,7 @@ std::vector<std::vector<std::string>> extract_csv_rows(const Map &map)
     column_names.push_back(header);
   }
 
-  column_names.push_back("Cartogram Data (eg. Population)");
+  column_names.push_back(TARGET_AREA_COL_NAME);
 
   csv_rows.push_back(column_names);
 

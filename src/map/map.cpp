@@ -2,6 +2,7 @@
 #include "parse/parse_csv.hpp"
 #include "parse/parse_geojson.hpp"
 #include "region/region.hpp"
+#include "constants.hpp"
 #include <iostream>
 #include <map>
 #include <nlohmann/json.hpp>
@@ -111,13 +112,12 @@ match_region_target_areas(
   const std::vector<Region> &regions,
   const std::map<std::string, std::vector<std::string>> &csv_data)
 {
-  const std::string target_area_col_name = "Cartogram Data (eg. Population)";
-  if (csv_data.count(target_area_col_name) == 0) {
+  if (csv_data.count(TARGET_AREA_COL_NAME) == 0) {
     throw std::runtime_error(
-      "Target areas column must have the name: " + target_area_col_name);
+      "Target areas column must have the name: " + TARGET_AREA_COL_NAME);
   }
   const std::vector<std::string> target_areas =
-    csv_data.at(target_area_col_name);
+    csv_data.at(TARGET_AREA_COL_NAME);
   for (const auto &[_, properties] : csv_data) {
     const auto [match, header] =
       find_matching_property_header(regions, properties);
