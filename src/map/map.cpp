@@ -1,8 +1,8 @@
 #include "map/map.hpp"
+#include "constants.hpp"
 #include "parse/parse_csv.hpp"
 #include "parse/parse_geojson.hpp"
 #include "region/region.hpp"
-#include "constants.hpp"
 #include <iostream>
 #include <map>
 #include <nlohmann/json.hpp>
@@ -239,6 +239,16 @@ void Map::adjust_map_for_plotting()
   translate(target_center_x, target_center_y);
 }
 
+std::string get_properties_string(
+  const std::map<std::string, std::string> &prop)
+{
+  std::string prop_str = "";
+  for (const auto &[header, value] : prop) {
+    prop_str += header + ": " + value + ", ";
+  }
+  return prop_str;
+}
+
 const Region &Map::find_matching_region(const Region &other_region) const
 {
   for (const auto &region : regions_) {
@@ -247,5 +257,8 @@ const Region &Map::find_matching_region(const Region &other_region) const
     }
   }
   throw std::runtime_error(
-    "Regions could not be matched between two GeoJSON.");
+    "Regions could not be matched between two GeoJSON. For the first GeoJSON "
+    "region: " +
+    get_properties_string(other_region.get_properties()) +
+    "no matching region found in the second GeoJSON.");
 }
