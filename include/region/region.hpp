@@ -26,6 +26,7 @@ public:
   double get_target_area() const;
   bool operator==(const Region &) const;
   void scale(const double);
+  void sort_pwhs_by_area();
   void standardize_each_pwh_independently();
   void translate(const double, const double);
   void update_target_area(const double);

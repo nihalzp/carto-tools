@@ -26,6 +26,7 @@ public:
   void make_total_area_one();
   void make_total_target_area_one();
   void scale(const double);
+  void sort_pwhs_in_each_region_by_area();
   void standardize_each_pwh_independently();
   void store_target_areas(const std::string &);
   void translate(const double, const double);

@@ -19,6 +19,9 @@ void compute_similarity(const argparse::ArgumentParser &arguments)
   Map map1(geo_file_1);
   Map map2(geo_file_2);
 
+  map1.sort_pwhs_in_each_region_by_area();
+  map2.sort_pwhs_in_each_region_by_area();
+
   map1.standardize_each_pwh_independently();
   map2.standardize_each_pwh_independently();
 

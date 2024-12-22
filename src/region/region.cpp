@@ -113,6 +113,16 @@ double Region::compute_ymin() const
   return ymin;
 }
 
+void Region::sort_pwhs_by_area()
+{
+  std::sort(
+    pwhs_.begin(),
+    pwhs_.end(),
+    [](const Polygon_with_holes &a, const Polygon_with_holes &b) {
+      return a.compute_area() > b.compute_area();
+    });
+}
+
 void Region::scale(const double factor)
 {
   for (auto &pwh : pwhs_) {

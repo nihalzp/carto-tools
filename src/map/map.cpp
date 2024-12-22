@@ -158,6 +158,13 @@ double Map::compute_total_target_area() const
   return total_target_area;
 }
 
+void Map::sort_pwhs_in_each_region_by_area()
+{
+  for (auto &region : regions_) {
+    region.sort_pwhs_by_area();
+  }
+}
+
 void Map::scale(const double factor)
 {
   for (auto &region : regions_) {
