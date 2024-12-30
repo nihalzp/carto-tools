@@ -76,3 +76,4 @@ lib/
 
 # Generated Image Files
 *.svg
+.vscode-ctags
