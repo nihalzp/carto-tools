@@ -103,7 +103,7 @@ std::vector<Point> get_self_intersections(const Map &map)
       intersection_pts.begin(),
       intersection_pts.end(),
       [](const Point &a, const Point &b) {
-        return a.x() == b.x() && a.y() == b.y();
+        return boost::geometry::equals(a, b);
       }),
     intersection_pts.end());
   return intersection_pts;
