@@ -108,6 +108,47 @@ carto --create_csv --map <geojson_file>
 carto --create_csv --map ./data/belgium/belgium.geojson
 ```
 
+### 5. **Using Shell Scripts**
+
+The repository includes several shell scripts to automate common tasks. These scripts assume that your analysis data is located in a specific directory. By default, the scripts will look for files in the current directory unless a different directory is specified as an argument.
+
+### Assumptions
+- The scripts assume that the GeoJSON files follow a naming convention: `<base_name>_input.geojson`, `<base_name>_cartogram.geojson`, and `<base_name>_fcarto.geojson`.
+- The `area_error.sh` script also assumes the presence of a target area CSV file named `<base_name>.csv`.
+
+#### similarity.sh
+This script calculates similarity metrics between `_input.geojson` files and their corresponding `_cartogram.geojson` and `_fcarto.geojson` files.
+
+```bash
+./similarity.sh [directory]
+```
+**Example:**
+```bash
+./similarity.sh ./data/belgium
+```
+
+#### intersections.sh
+This script generates intersection reports for `_input.geojson`, `_cartogram.geojson`, and `_fcarto.geojson` files.
+
+```bash
+./intersections.sh [directory]
+```
+**Example:**
+```bash
+./intersections.sh ./data/belgium
+```
+
+#### area_error.sh
+This script calculates area error metrics for `_input.geojson`, `_cartogram.geojson`, and `_fcarto.geojson` files using a corresponding target area CSV file.
+
+```bash
+./area_error.sh [directory]
+```
+**Example:**
+```bash
+./area_error.sh ./data/belgium
+```
+
 ---
 
 ## Contributing

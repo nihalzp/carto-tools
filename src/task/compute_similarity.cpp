@@ -6,6 +6,7 @@
 #include <argparse/argparse.hpp>
 #include <iostream>
 #include <string>
+#include <fstream>
 
 void compute_similarity(const argparse::ArgumentParser &arguments)
 {
@@ -33,4 +34,22 @@ void compute_similarity(const argparse::ArgumentParser &arguments)
   std::cout << "Frechet distance: " << frechet_distance << "\n";
   std::cout << "Hausdorff distance: " << hausdorff_distance << "\n";
   std::cout << "Symmetric difference: " << symmetric_difference << "\n";
+
+  // Extract the name for the CSV file
+  std::string map1_filename = geo_file_1.substr(geo_file_1.find_last_of("/\\") + 1);
+  std::string map2_filename = geo_file_2.substr(geo_file_2.find_last_of("/\\") + 1);
+  std::string csv_filename = map2_filename.substr(map2_filename.find_last_of('_') + 1);
+  csv_filename = csv_filename.substr(0, csv_filename.find_last_of('.')) + ".csv";
+
+  // Output results to CSV file
+  std::ofstream csv_file;
+  csv_file.open(csv_filename, std::ios::app);
+
+  // Check if the file is empty and write headers if necessary
+  if (csv_file.tellp() == 0) {
+    csv_file << "map_name,frechet distance,hausdorff distance,symmetric difference\n";
+  }
+
+  csv_file << map1_filename << "," << frechet_distance << "," << hausdorff_distance << "," << symmetric_difference << "\n";
+  csv_file.close();
 }
